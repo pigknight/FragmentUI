@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:id="@+id/tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:orientation="horizontal"
+        android:background="#ffffff">
+        <RelativeLayout
+            android:id="@+id/tab_local"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="@drawable/view_bg_selector">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_color_black_red_selector"
+                android:textSize="@dimen/tab_item_font_size"
+                android:text="Local"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_color_transparent_red_selector"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="20dip"
+            android:layout_gravity="center_vertical"
+            android:background="#dedede"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/tab_network"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="@drawable/view_bg_selector">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_color_black_red_selector"
+                android:textSize="@dimen/tab_item_font_size"
+                android:text="Network"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_color_transparent_red_selector"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="20dip"
+            android:layout_gravity="center_vertical"
+            android:background="#dedede"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/tab_favorite"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="@drawable/view_bg_selector">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_color_black_red_selector"
+                android:textSize="@dimen/tab_item_font_size"
+                android:text="Favorite"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_color_transparent_red_selector"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividing_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:background="#c8c8c8"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:persistentDrawingCache="animation" >
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

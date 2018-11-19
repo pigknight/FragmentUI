@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="main_app_color">#f44646</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="list_view_item_clicked_color">#fff2f2f2</color>
+    <color name="list_view_item_clicked_color2">#55f2f2f2</color>
+    <color name="list_view_item_clicked_color3">#ff545668</color>
+    <color name="list_view_item_normal_color">#00000000</color>
+</resources>
