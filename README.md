@@ -27,7 +27,7 @@ Layer-2: --|--Playing
 
 FragmentUI.setDefaultAnimRes(R.anim.push_right_in,R.anim.push_left_out,R.anim.push_left_in,R.anim.push_right_out);
 
-2.初始化跟U节点
+2.初始化跟UI节点
 
 Root.initInstance(this);
 
