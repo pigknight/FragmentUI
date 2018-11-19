@@ -17,7 +17,7 @@ Layer-2: --|--Playing
 
 
 音乐Demo运行效果:
-![screenshot](https://github.com/pigknight/FragmentUI/blob/master/demo.gif "screenshot")
+![image](https://github.com/pigknight/FragmentUI/blob/master/demo.gif)
 
 
 
