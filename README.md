@@ -17,7 +17,38 @@ Layer-2: --|--Playing
 
 
 音乐Demo运行效果:
+
 ![image](https://github.com/pigknight/FragmentUI/tree/master/demo.gif?raw=true)
 
+
+示例代码:
+
+1.设置默认UI切换动画
+
+FragmentUI.setDefaultAnimRes(R.anim.push_right_in,R.anim.push_left_out,R.anim.push_left_in,R.anim.push_right_out);
+
+2.初始化跟U节点
+
+Root.initInstance(this);
+
+3.动态显示其他UI
+
+Root.getInstance().enterUI(Content.class);
+
+或
+
+Root.getInstance().findUI(Content.class).enterUI(AlbumList.class);
+
+或
+
+this.enterUI(AlbumList.class);
+
+4.退出一个UI
+
+Root.getInstance().findUI(MusicList.class).exitUI();
+
+或
+
+this.exitUI()
 
 
