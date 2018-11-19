@@ -2,7 +2,9 @@ package com.gwf.ui.arch.util;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -12,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gwf.ui.arch.MainActivity;
 import com.gwf.ui.arch.R;
+import com.gwf.ui.arch.ui.Root;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,6 +46,9 @@ public abstract class FragmentUI extends Fragment {
     private static int mDefaultPopInAnimRes = -1;
     private static int mDefaultPopOutAnimRes = -1;
 
+    private Handler mHandler = null;
+    private static final int MSG_ID_RUNNABLE = 1;
+
     public FragmentUI(){
 
     }
@@ -48,6 +56,8 @@ public abstract class FragmentUI extends Fragment {
     protected void startup(Context context, boolean isRoot) {
         mContext = context;
         mIsRoot = isRoot;
+
+        mHandler = new UIHandler(mContext.getApplicationContext());
 
         mContainer = onCreateContainer();
         if( mContainer != null ) {
@@ -153,6 +163,10 @@ public abstract class FragmentUI extends Fragment {
         super.onDestroyView();
 
         logInfo(this.getClass().getSimpleName()+ ": onDestroyView()");
+
+        logInfo(this.getClass().getSimpleName()+ ": onDestroyUI()  start.");
+        onDestroyUI();
+        logInfo(this.getClass().getSimpleName()+ ": onDestroyUI()  start.");
     }
 
     @Override
@@ -161,9 +175,8 @@ public abstract class FragmentUI extends Fragment {
 
         logInfo(this.getClass().getSimpleName()+ ": onDestroy()");
 
-        logInfo(this.getClass().getSimpleName()+ ": onDestroyUI()  start.");
-        onDestroyUI();
-        logInfo(this.getClass().getSimpleName()+ ": onDestroyUI()  start.");
+        if( mHandler != null )
+            mHandler.removeMessages(MSG_ID_RUNNABLE);
     }
 
     @Override
@@ -348,19 +361,6 @@ public abstract class FragmentUI extends Fragment {
         return false;
     }
 
-    /**
-     * 判断Fragment是否处理了Back键
-     *
-     * @return 如果处理了back键则返回 **true**
-     */
-    public boolean isFragmentBackHandled(Fragment fragment) {
-        return (fragment != null
-                && fragment.isVisible()
-                && fragment.getUserVisibleHint() //for ViewPager
-        );//&& fragment is FragmentBackHandler
-        //&& (fragment as FragmentBackHandler).onBackPressed())
-    }
-
     //=======================================================
     protected void logInfo(String msg) {
         if (DEBUG_INFO)
@@ -404,6 +404,44 @@ public abstract class FragmentUI extends Fragment {
                         theChildUI.dumpChildUIArch(layerNumber,lineText+"   ");
                     }
                 }
+            }
+        }
+    }
+
+    public final void run( Runnable r){
+        if( mHandler != null ){
+            mHandler.sendMessage(mHandler.obtainMessage(MSG_ID_RUNNABLE, r));
+        }
+    }
+
+    public final void runDelayed( Runnable r,long delayMillis){
+        if( mHandler != null ){
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_ID_RUNNABLE, r),delayMillis);
+        }
+    }
+
+    /**
+     * 声明一个静态的Handler内部类，并持有外部类的弱引用
+     */
+    private class UIHandler extends Handler {
+
+        private final WeakReference<Context> mContext;
+
+        private UIHandler(Context context) {
+            this.mContext = new WeakReference<Context>(context);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            mHandler.removeMessages(msg.what);
+
+            switch (msg.what) {
+                case MSG_ID_RUNNABLE:
+                    Runnable r = (Runnable)msg.obj;
+                    if( r != null ){
+                        r.run();
+                    }
+                    break;
             }
         }
     }
