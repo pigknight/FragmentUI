@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,6 +32,12 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //判断savedInstanceState不等以null就弹出所有Fragment 全部重新加载
+        if( savedInstanceState != null ) {
+            FragmentManager manager = getSupportFragmentManager();
+            manager.popBackStackImmediate(null, 1);
+        }
 
         mMainContainer = (ViewGroup) View.inflate(this,R.layout.activity_main,null);
         setContentView( mMainContainer );

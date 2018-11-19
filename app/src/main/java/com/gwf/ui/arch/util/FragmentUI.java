@@ -97,6 +97,7 @@ public abstract class FragmentUI extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
         logInfo(this.getClass().getSimpleName()+ ": onCreateView()");
 
         if( mContainer != null ) {
@@ -105,7 +106,7 @@ public abstract class FragmentUI extends Fragment {
             logInfo(this.getClass().getSimpleName() + ": onCreateUI()  end.");
             return mContainer;
         }else
-            return  super.onCreateView(inflater, container, savedInstanceState);
+            return  view;
     }
 
     @Override
