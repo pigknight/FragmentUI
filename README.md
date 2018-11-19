@@ -15,3 +15,9 @@ Layer-3:------|--MusicList
 
 Layer-2: --|--Playing
 
+
+音乐Demo运行效果:
+![screenshot](https://github.com/pigknight/FragmentUI/blob/master/demo.gif "screenshot")
+
+
+
